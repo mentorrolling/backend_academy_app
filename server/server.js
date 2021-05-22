@@ -1,10 +1,10 @@
-const express = require('express')
-const mongoose = require('mongoose');
+const express = require("express");
+var cors = require("cors");
+const mongoose = require("mongoose");
 // const bodyParser = require('body-parser')
-require('./config/config')
-const app = express()
-
-
+require("./config/config");
+const app = express();
+app.use(cors());
 // app.use(bodyParser.urlencoded({ extended: false }))
 
 // // parse application/json
@@ -12,9 +12,11 @@ const app = express()
 
 //Reemplazo del body-parse
 
-app.use(express.urlencoded({
-    extended: true
-}));
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
 // app.get('/usuarios', function (req, res) {
 //     res.json('GET usuarios')
@@ -44,21 +46,27 @@ app.use(express.urlencoded({
 // app.delete('/usuarios/:id', function (req, res) {
 //     res.json('DELETE usuarios')
 // })
-app.use(require('./rutas/usuario'))
+// app.use(require("./rutas/usuario"));
+// app.use(require("./rutas/login"));
+app.use(require("./rutas/index"));
 
 /*
 Mongoose es una herramienta de modelado de objetos de MongoDB diseñada para funcionar en un entorno asincrónico. Mongoose admite tanto promesas como devoluciones de llamada.
 */
-mongoose.connect('mongodb://localhost:27017/test', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true
-},(err, res)=>{
-    if(err) throw err;
-    console.log('Base de datos online')
-});
+mongoose.connect(
+  "mongodb://localhost:27017/test",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  },
+  (err, res) => {
+    if (err) throw err;
+    console.log("Base de datos online");
+  }
+);
 
 app.listen(process.env.PORT, () => {
-    console.log('Escuchando puerto ', process.env.PORT)
-})
+  console.log("Escuchando puerto ", process.env.PORT);
+});
