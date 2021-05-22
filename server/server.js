@@ -54,7 +54,7 @@ app.use(require("./rutas/index"));
 Mongoose es una herramienta de modelado de objetos de MongoDB diseñada para funcionar en un entorno asincrónico. Mongoose admite tanto promesas como devoluciones de llamada.
 */
 mongoose.connect(
-  "mongodb://localhost:27017/test",
+  process.env.URLDB,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
